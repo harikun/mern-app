@@ -38,7 +38,9 @@ const Modal = (props) => {
         unmounOnExit
         timeout={200}
         classNames="modal"
-      ></CSSTransition>
+      >
+        <ModalOverlay {...props} />
+      </CSSTransition>
     </React.Fragment>
   );
 };
