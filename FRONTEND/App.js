@@ -5,15 +5,16 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
+
+import Users from "./user/pages/Users";
 import NewPlace from "./places/pages/NewPlace";
-import UpdatePlace from "./places/pages/UpdatePlace";
 import UserPlaces from "./places/pages/UserPlaces";
+import UpdatePlace from "./places/pages/UpdatePlace";
+import Auth from "./user/pages/Auth";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 import { AuthContext } from "./shared/context/auth-context";
-import Auth from "./user/pages/Auth";
-import Users from "./user/pages/Users";
 
-function App() {
+const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const login = useCallback(() => {
@@ -32,10 +33,10 @@ function App() {
         <Route path="/" exact>
           <Users />
         </Route>
-        <Route exact path="/:userId/places">
+        <Route path="/:userId/places" exact>
           <UserPlaces />
         </Route>
-        <Route exact path="/places/new">
+        <Route path="/places/new" exact>
           <NewPlace />
         </Route>
         <Route path="/places/:placeId">
@@ -47,10 +48,10 @@ function App() {
   } else {
     routes = (
       <Switch>
-        <Route exact path="/">
+        <Route path="/" exact>
           <Users />
         </Route>
-        <Route exact path="/:userId/places">
+        <Route path="/:userId/places" exact>
           <UserPlaces />
         </Route>
         <Route path="/auth">
@@ -71,6 +72,6 @@ function App() {
       </Router>
     </AuthContext.Provider>
   );
-}
+};
 
 export default App;
