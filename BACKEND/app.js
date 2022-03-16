@@ -1,6 +1,6 @@
-import express from "express";
-import bodyParser from "body-parser";
-import placesRoutes from "./routes/place-routes.js";
+const express = require("express");
+const bodyParser = require("body-parser");
+const placesRoutes = require("./routes/place-routes");
 
 const app = express();
 
