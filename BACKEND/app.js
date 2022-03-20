@@ -27,7 +27,9 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(process.env.URL_MONGOODB)
+  .connect(
+    "mongodb+srv://hari:Sikamaru7@cluster0.qitsy.mongodb.net/places?retryWrites=true&w=majority"
+  )
   .then(() => {
     app.listen(5000);
   })
