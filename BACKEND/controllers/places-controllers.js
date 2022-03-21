@@ -76,15 +76,15 @@ const createPlace = async (req, res, next) => {
     return next(error);
   }
 
-  const createdPlace = {
+  const createdPlace = new Place({
     id: uuidv4(),
     title,
     description,
-    location: coordinates,
+    imageUrl: 'https:upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
     address,
+    // location: coordinates,
     creator,
-  };
-
+  });
   DUMMY_PLACES.push(createdPlace);
   res.status(201).json({ place: createdPlace });
 };
