@@ -85,7 +85,7 @@ const createPlace = async (req, res, next) => {
     // location: coordinates,
     creator,
   });
-  DUMMY_PLACES.push(createdPlace);
+  createdPlace.save();
   res.status(201).json({ place: createdPlace });
 };
 
