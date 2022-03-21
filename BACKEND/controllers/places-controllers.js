@@ -85,7 +85,13 @@ const createPlace = async (req, res, next) => {
     // location: coordinates,
     creator,
   });
-  createdPlace.save();
+  try {
+
+    await createdPlace.save();
+  }catch(error){
+    console.log(error);
+    return next(new HttpError("Creating place failed, please try again.", 500));
+  }
   res.status(201).json({ place: createdPlace });
 };
 
