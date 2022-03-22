@@ -35,9 +35,9 @@ let DUMMY_PLACES = [
   },
 ];
 
-const getPlaceById = (req, res, next) => {
+const getPlaceById =  async (req, res, next) => {
   const placeId = req.params.pid;
-  const places =
+  const places = await Place.findById(placeId);
 
   if (!places || places.length === 0) {
     throw new HttpError("Could not find  places for the provided id.", 404);
