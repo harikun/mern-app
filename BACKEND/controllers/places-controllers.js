@@ -37,7 +37,7 @@ let DUMMY_PLACES = [
 
 const getPlaceById = (req, res, next) => {
   const placeId = req.params.pid;
-  const places = DUMMY_PLACES.filter((p) => p.id === placeId);
+  const places =
 
   if (!places || places.length === 0) {
     throw new HttpError("Could not find  places for the provided id.", 404);
