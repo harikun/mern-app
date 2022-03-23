@@ -125,9 +125,16 @@ const updatePlace = async (req, res, next) => {
     return next(new HttpError("Something went wrong, could not update place.", 500));
   }
 
-  updatedPlace.title = title;
-  updatedPlace.description = description;
+  place.title = title;
+  place.description = description;
 
+  try {
+    await place.save();
+  }
+  catch(error){
+    console.log(error);
+    return next(new HttpError("Something went wrong, could not update place.", 500));
+  }
 
 
   res.status(200).json({ place: updatedPlace });
