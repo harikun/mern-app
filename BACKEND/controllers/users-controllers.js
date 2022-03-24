@@ -24,10 +24,7 @@ const signup = (req, res, next) => {
   }
 
   const { name, email, password } = req.body;
-  const existingUser = DUMMY_USERS.find((u) => u.email === email);
-  if (existingUser) {
-    throw new HttpError("Could not create user. Email already exists.", 422);
-  }
+
   const user = {
     id: uuidv4(),
     name,
