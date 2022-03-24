@@ -31,6 +31,15 @@ const signup = async (req, res, next) => {
     const error = new HttpError("Signing up failed, please try again.", 500);
     return next(error);
   }
+
+  if (existingUser) {
+    const error = new HttpError(
+      "User exists already, please login instead.",
+      422
+    );
+    return next(error);
+  }
+
   const user = {
     id: uuidv4(),
     name,
