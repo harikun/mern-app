@@ -49,7 +49,13 @@ const signup = async (req, res, next) => {
     places,
   });
 
-  DUMMY_USERS.push(user);
+  try {
+    await createdUser.save();
+  } catch (err) {
+    const error = new HttpError("Signing up failed, please try again.", 500);
+    return next(error);
+  }
+
   res.status(201).json({ user });
 };
 
