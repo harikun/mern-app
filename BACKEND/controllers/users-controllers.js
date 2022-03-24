@@ -40,12 +40,15 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
-  const user = {
-    id: uuidv4(),
+  const createdUser = new User({
     name,
     email,
     password,
-  };
+    imageurl:
+      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
+    places,
+  });
+
   DUMMY_USERS.push(user);
   res.status(201).json({ user });
 };
