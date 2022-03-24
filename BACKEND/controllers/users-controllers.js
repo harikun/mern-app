@@ -16,7 +16,7 @@ const getUsers = (req, res, next) => {
   res.json({ users: DUMMY_USERS });
 };
 
-const signup = (req, res, next) => {
+const signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors);
@@ -24,7 +24,13 @@ const signup = (req, res, next) => {
   }
 
   const { name, email, password } = req.body;
-
+  let existingUser;
+  try {
+    existingUser = await User.findOne({ email: email });
+  } catch (err) {
+    const error = new HttpError("Signing up failed, please try again.", 500);
+    return next(error);
+  }
   const user = {
     id: uuidv4(),
     name,
