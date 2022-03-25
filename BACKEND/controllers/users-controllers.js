@@ -60,12 +60,12 @@ const signup = async (req, res, next) => {
   res.status(201).json({ user: createdUser.toObject({ getters: true }) });
 };
 
-const login = (req, res, next) => {
+const login = async (req, res, next) => {
   const { email, password } = req.body;
 
   let existingUser;
   try {
-    existingUser = User.findOne({ email: email });
+    existingUser = await User.findOne({ email: email });
   } catch (err) {
     const error = new HttpError("Logging in failed, please try again.", 500);
     return next(error);
@@ -79,7 +79,10 @@ const login = (req, res, next) => {
     return next(error);
   }
 
-  res.json({ user });
+  res.json({
+    message: "Logged in!",
+    user: existingUser.toObject({ getters: true }),
+  });
 };
 
 exports.getUsers = getUsers;
