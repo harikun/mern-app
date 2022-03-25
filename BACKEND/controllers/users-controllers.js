@@ -63,6 +63,14 @@ const signup = async (req, res, next) => {
 const login = (req, res, next) => {
   const { email, password } = req.body;
 
+  let existingUser;
+  try {
+    existingUser = User.findOne({ email: email });
+  } catch (err) {
+    const error = new HttpError("Logging in failed, please try again.", 500);
+    return next(error);
+  }
+
   res.json({ user });
 };
 
