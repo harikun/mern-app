@@ -34,7 +34,7 @@ const signup = async (req, res, next) => {
     );
   }
 
-  const { name, email, password, places } = req.body;
+  const { name, email, password } = req.body;
   let existingUser;
   try {
     existingUser = await User.findOne({ email: email });
@@ -57,7 +57,7 @@ const signup = async (req, res, next) => {
     password,
     imageurl:
       "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
-    places,
+    places: [],
   });
 
   try {
