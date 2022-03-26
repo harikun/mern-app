@@ -4,38 +4,7 @@ const HttpError = require("../models/http-error");
 const getCoordsForAddress = require("../util/location");]
 const Place = require("../models/place");
 const User = require("../models/user");
-
-
 const { v4: uuidv4 } = require("uuid");
-
-let DUMMY_PLACES = [
-  {
-    id: "p1",
-    title: "Empire State Building",
-    description: "One of the most famous sky scrapers in the world!",
-    imageUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg",
-    address: "20 W 34th St, New York, NY 10001, USA",
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878584,
-    },
-    creator: "u1",
-  },
-  {
-    id: "p2",
-    title: "Emp. State Building",
-    description: "One of the most famous sky scrapers in the world!",
-    imageUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg",
-    address: "20 W 34th St, New York, NY 10001, USA",
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878584,
-    },
-    creator: "u2",
-  },
-];
 
 const getPlaceById =  async (req, res, next) => {
   const placeId = req.params.pid;
@@ -54,9 +23,6 @@ const getPlaceById =  async (req, res, next) => {
 
   res.json({ place: place.toObject({ getters: true }) });
 };
-
-// function getPlaceById() {...}
-// const getPlaceById = () => {...}
 
 const getPlacesByUserId = async (req, res, next) => {
   const userId = req.params.uid;
