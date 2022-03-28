@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import UsersList from "../components/UsersList";
 
 const Users = () => {
@@ -24,7 +26,17 @@ const Users = () => {
     };
     sendRequest();
   }, []);
-  return <UsersList items={USERS} />;
+  return (
+    <>
+      <ErrorModal error={error} onClear={() => setError(null)} />
+      {isLoading && (
+        <div className="center">
+          <LoadingSpinner />
+        </div>
+      )}
+      <UsersList items={loadedUsers} />
+    </>
+  );
 };
 
 export default Users;
