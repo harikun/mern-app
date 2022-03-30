@@ -4,8 +4,6 @@ import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import UsersList from "../components/UsersList";
 
 const Users = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState();
   const [loadedUsers, setLoadedUsers] = useState();
   useEffect(() => {
     const sendRequest = async () => {
