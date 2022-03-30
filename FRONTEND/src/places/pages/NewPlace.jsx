@@ -10,8 +10,11 @@ import {
 import "./PlaceForm.css";
 import { useForm } from "../../shared/hooks/form-hook";
 import { useHttpClient } from "../../shared/hooks/http-hook";
+import { useContext } from "react";
+import { AuthContext } from "../../shared/context/auth-context";
 
 const NewPlace = () => {
+  const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient;
   const [formState, inputHandler] = useForm(
     {
@@ -31,8 +34,21 @@ const NewPlace = () => {
     false
   );
 
-  const placeSubmitHandler = (event) => {
+  const placeSubmitHandler = async (event) => {
     event.preventDefault();
+    try {
+      await sendRequest(
+        "http://locahost:5000/api/places",
+        "POST",
+        JSON.stringify({
+          title: formState.inputs.title.value,
+          description: formState.inputs.description.value,
+          address: formState.inputs.address.value,
+          creator: auth.userId,
+        })
+      );
+      // redirect user to a different page
+    } catch (err) {}
   };
 
   return (
